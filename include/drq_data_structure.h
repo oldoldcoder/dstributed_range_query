@@ -10,8 +10,9 @@
 #include "eTPSS.h"
 #include "utils.h"
 #include "vector"
+/*-----------------------------常量定义----------------------------*/
+#define DRQ_DATA_FILE "/root/heqi/encryption_algorithm/dstributed_range_query/data/DRQ_DATA_FILE.txt"
 // 数据拥有者
-
 typedef struct {
     // id
     int id;
@@ -48,5 +49,8 @@ RESULT drq_read_data_to_owner(drq_data_set * set);
 RESULT drq_encrypt_data_owner(drq_data_owner * owner);
 // 销毁data_set
 RESULT drq_free_data_set(drq_data_set * set);
-
+// 发送通信每个data_owner开始自查
+RESULT drq_notify_do_query(drq_data_set * set);
+// 进行隐私集合求交
+RESULT drq_PSI(drq_data_owner * res,drq_data_owner * a,drq_data_owner * b);
 #endif //DRQ_DATA_STRUCTURE_H

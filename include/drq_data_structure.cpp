@@ -19,3 +19,12 @@ RESULT drq_encrypt_data_owner(drq_data_owner * owner){
 RESULT drq_free_data_set(drq_data_set * set){
 
 }
+
+// 发送通信每个data_owner开始自查
+RESULT drq_notify_do_query(drq_data_set * set){
+
+}
+// 进行隐私集合求交
+RESULT drq_PSI(drq_data_owner * res,drq_data_owner * a,drq_data_owner * b){
+
+}

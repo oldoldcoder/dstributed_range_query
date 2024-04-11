@@ -9,7 +9,11 @@
 #include "openssl/bn.h"
 #include "eTPSS.h"
 #include "utils.h"
+#include "drq_data_structure.h"
 #include <vector>
+/*-----------------------------常量定义----------------------------*/
+#define QUERY_DATA_FILE "/root/heqi/encryption_algorithm/dstributed_range_query/data/QUERY_DATA_FILE.txt"
+
 // 分布式查询的范围定义
 typedef struct {
     int d;
@@ -17,17 +21,13 @@ typedef struct {
     eTPSS *** range;
 }query_range;
 
-
-
 /*---------------------操作方法---------------------*/
 // 初始化查询范围
-
+RESULT drq_init_query_range(query_range * ranges);
 // 读取查询范围
-
+RESULT drq_read_query_range(query_range * ranges);
 // 将不同维度的查询范围发送过去，获取查询的结果
-
-// 每个数据拥有者内部开始单查
-
-// 对于指定的data_Set内部的数据拥有者的结果数据进行隐私集合求交集
-
+RESULT drq_send_range2owner(query_range * ranges,drq_data_set * set);
+// 释放query_range
+RESULT drq_free_query_range(query_range * ranges);
 #endif //DRQ_OPERATION_H
