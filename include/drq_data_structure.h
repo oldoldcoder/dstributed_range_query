@@ -7,18 +7,13 @@
 #define DRQ_DATA_STRUCTURE_H
 
 #include "openssl/bn.h"
-#include "eTPSS.h"
 #include "utils.h"
 #include "vector"
 /*-----------------------------常量定义----------------------------*/
-#define DRQ_DATA_FILE "/root/heqi/encryption_algorithm/dstributed_range_query/data/DRQ_DATA_FILE.txt"
 // 数据拥有者
 typedef struct {
     // id
     int id;
-    // 一个加密数据
-    eTPSS * en_val;
-    // 一个解密数据
     BIGNUM * de_val;
 }drq_data_owner_unit;
 
@@ -28,17 +23,20 @@ typedef struct {
     // 一个数据
     drq_data_owner_unit ** units;
     // 记录查询的范围
-    eTPSS ** query_range;
+    BIGNUM ** query_range;
     // 记录查询的结果
-    std::vector<int> query_res;
+    std::vector<int> * query_res;
 }drq_data_owner;
 
 // 数据总的持有者
 typedef struct {
+    int n;
     // 维度也是数据拥有者的量
     int d;
     // 数据拥有者的集合
     drq_data_owner ** owners;
+    // 保存上下文
+    BN_CTX * ctx;
 }drq_data_set;
 
 // data_set创建数据拥有者

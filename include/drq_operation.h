@@ -7,18 +7,15 @@
 #define DRQ_OPERATION_H
 
 #include "openssl/bn.h"
-#include "eTPSS.h"
 #include "utils.h"
 #include "drq_data_structure.h"
 #include <vector>
 /*-----------------------------常量定义----------------------------*/
-#define QUERY_DATA_FILE "/root/heqi/encryption_algorithm/dstributed_range_query/data/QUERY_DATA_FILE.txt"
-
 // 分布式查询的范围定义
 typedef struct {
     int d;
     // 每个元素都是一个二维的数组，[0]代表了lower,[1]代表了upper
-    eTPSS *** range;
+    BIGNUM *** range;
 }query_range;
 
 /*---------------------操作方法---------------------*/

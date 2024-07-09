@@ -3,7 +3,7 @@ project(drq CXX)
 
 set(CMAKE_CXX_STANDARD  11)
 # 设置编译选项
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall")
 
 # 添加源文件目录
 aux_source_directory(include SOURCE_FILES)
@@ -14,9 +14,6 @@ find_package(OpenSSL REQUIRED)
 include_directories(include)
 
 if(OPENSSL_FOUND)
-    # 添加 libeTPSS.a 静态库
-    add_library(eTPSS STATIC IMPORTED)
-    set_property(TARGET eTPSS PROPERTY IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/libeTPSS.a)
 
     add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
