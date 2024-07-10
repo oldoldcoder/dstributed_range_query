@@ -1,9 +1,9 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <stdio.h>
+#include <cstdio>
 #include <malloc.h>
-#include <time.h>
+#include <ctime>
 #include "openssl//bn.h"
 /*---------------定义常量------------*/
 #define SUCCESS 1

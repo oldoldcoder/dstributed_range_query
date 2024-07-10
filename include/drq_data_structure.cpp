@@ -1,8 +1,9 @@
 #include <cstring>
+#include <algorithm>
 #include "openssl/bn.h"
 #include "utils.h"
 #include "drq_data_structure.h"
-
+#include "iostream"
 using namespace std;
 
 // data_set创建数据拥有者
@@ -128,8 +129,24 @@ RESULT drq_notify_do_query(drq_data_set * set){
     }
     return SUCCESS;
 }
-
+static std::vector<int> intersection(const std::vector<int>& v1, const std::vector<int>& v2) {
+    std::vector<int> result;
+    std::set_intersection(v1.begin(), v1.end(), v2.begin(), v2.end(), std::back_inserter(result));
+    return result;
+}
 // 进行隐私集合求交
-RESULT drq_PSI(drq_data_owner * res,drq_data_owner * a,drq_data_owner * b){
-
+vector<int> drq_PSI(drq_data_set * set){
+    int d = set->d;
+    for(int i = 0 ; i < d ; ++i){
+        // 先对所有 vector 进行排序
+        std::sort(set->owners[i]->query_res->begin(), set->owners[i]->query_res->end());
+    }
+    // 初始化结果交集为第一个vector
+    vector<int> result = *set->owners[0]->query_res;
+    // 依次计算交集
+    for (size_t i = 1; i < d; ++i) {
+        // 计算当前结果和下一个 vector 的交集
+        result = intersection(result, *set->owners[i]->query_res);
+    }
+    return result;
 }
