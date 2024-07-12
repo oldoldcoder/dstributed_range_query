@@ -22,7 +22,7 @@ if(OPENSSL_FOUND)
     target_include_directories(${PROJECT_NAME} PUBLIC include)
     target_include_directories(drq_test PUBLIC include)
     # 链接 OpenSSL 库
-    target_link_libraries(${PROJECT_NAME} OpenSSL::SSL OpenSSL::Crypto eTPSS)
-    target_link_libraries(drq_test OpenSSL::SSL OpenSSL::Crypto eTPSS)
+    target_link_libraries(${PROJECT_NAME} OpenSSL::SSL OpenSSL::Crypto)
+    target_link_libraries(drq_test OpenSSL::SSL OpenSSL::Crypto)
 
 endif (OPENSSL_FOUND)
