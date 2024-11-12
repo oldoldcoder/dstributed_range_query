@@ -1,6 +1,0 @@
-Current scope:
-dim[0]:89 151
-dim[1]:99 161
-dim[2]:109 171
-The file containing the scope is:
-0 1 2 

@@ -13,10 +13,13 @@ EXPORT_SYMBOL RESULT init_algo(drq_data_set* set, char* filePath) {
 		cerr << " init_set error!" << endl;
 		return ERROR;
 	}
+	cout << "init ok" << endl;
 	if (drq_read_data_to_owner(set, filePath) != SUCCESS) {
 		cerr << " read_data error!" << endl;
 		return ERROR;
 	}
+
+	cout << "read data ok" << endl;
 	int d = set->d;
 	for (int i = 0; i < d; i++) {
 		if (drq_encrypt_data_owner(set->owners[i]) != SUCCESS) {
@@ -24,7 +27,7 @@ EXPORT_SYMBOL RESULT init_algo(drq_data_set* set, char* filePath) {
 			return ERROR;
 		}
 	}
-
+	return SUCCESS;
 }
 EXPORT_SYMBOL RESULT query_algo(drq_data_set* set, char* queryPath, char* resultFilePath) {
 	// 先构建查询的范围
@@ -38,26 +41,16 @@ EXPORT_SYMBOL RESULT query_algo(drq_data_set* set, char* queryPath, char* result
 	// 内容自查
 	drq_notify_do_query(set);
 
-	//// 打印各个vector
-	//for (int i = 0; i < set->d; ++i) {
-	//    printf("%d th dataOwner:", i);
-	//    for (auto a : *(set->owners[i]->query_res)) {
-
-	//        printf("%d  ", a);
-	//    }
-	//    printf("\n");
-	//}
-
-
 	// 对于vector求交集运算
 	vector<int> ve = drq_PSI(set);
 
 
 	drq_write_res2File(ve, range, resultFilePath);
-	//  情况原有的vector的所有内容
-	for (int i = 0; i < set->d; ++i) {
-		// set->owners[i]->query_res->clear();  // 清空向量
 
+	cout << "drq_write_res2File ok" << endl;
+	//  情况原有的vector的所有内容
+	for (int i = 0; i < set->d; ++i) { 
+		set->owners[i]->query_res->clear();  // 清空向量
 	}
 	drq_free_query_range(&range);
 	return SUCCESS;

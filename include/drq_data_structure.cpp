@@ -90,36 +90,33 @@ RESULT drq_encrypt_data_owner(drq_data_owner* owner) {
 }
 // 销毁data_set
 RESULT drq_free_data_set(drq_data_set* set) {
-	if (set == nullptr) {
-		return ERROR; // 检查指针是否为空
-	}
+	//if (set == nullptr) {
+	//	return ERROR; // 检查指针是否为空
+	//}
 
-	int n = set->n;
-	int d = set->d;
+	//int n = set->n;
+	//int d = set->d;
 
-	for (int i = 0; i < d; ++i) {
-		if (set->owners[i] != nullptr) {
-			// 删除查询结果
-			 delete set->owners[i]->query_res;
+	//for (int i = 0; i < d; ++i) {
+	//	if (set->owners[i] != nullptr) {
+	//		// 删除查询结果
+	//		 delete set->owners[i]->query_res;
 
-			// 释放units
-			if (set->owners[i]->units != nullptr) {
-				for (int j = 0; j < n; j++) {
-					free(set->owners[i]->units[j]);
-				}
-				free(set->owners[i]->units);
-			}
+	//		// 释放units
+	//		if (set->owners[i]->units != nullptr) {
+	//			for (int j = 0; j < n; j++) {
+	//				free(set->owners[i]->units[j]);
+	//			}
+	//			free(set->owners[i]->units);
+	//		}
 
-			// 释放query_range
-			if (set->owners[i]->query_range != nullptr) {
-				free(set->owners[i]->query_range);
-			}
-		}
-		free(set->owners[i]);
-	}
+	//		// 释放query_range
+	//		if (set->owners[i]->query_range != nullptr) {
+	//			free(set->owners[i]->query_range);
+	//		}
+	//	}
+	//}
 
-	// 释放owners
-	free(set->owners);
 
 	// 释放上下文
 	BN_CTX_free(set->ctx);
